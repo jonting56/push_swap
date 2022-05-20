@@ -37,7 +37,7 @@ int	pb(t_data *a, t_data *b)
 	ft_printf("pb\n");
 	return (1);
 }
-
+// moves all elements up by one and 
 t_data	*ra(t_data *a)
 {
 	t_data	*tmp;
