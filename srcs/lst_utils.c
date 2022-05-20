@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:35:02 by jting             #+#    #+#             */
-/*   Updated: 2022/05/13 15:10:26 by jting            ###   ########.fr       */
+/*   Updated: 2022/05/18 12:54:05 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_isnumerical(char c)
 	return (0);
 }
 
-int	valid_int(int n)
+int	valid_int(long int n)
 {
 	if (n > 214783647)
 		return (0);
@@ -37,17 +37,38 @@ int	valid_int(int n)
 		return (0);
 	return (1);
 }
-/*
-int	check_valid(char **s, t_data *a)
+
+long int	push_atoi(char *s)
+{
+	int			i;
+	long int	result;
+	long int	sign;
+
+	i = 0;
+	result = 0;
+	sign = 1;
+	if (s[i] == '-')
+	{
+		sign *= -1;
+		i++;
+	}
+	while (s[i] >= '0' && s[i] <= '9' && s[i])
+	{
+		result *= 10;
+		result = result + s[i] - '0';
+		i++;
+	}
+	return (result * sign);
+}
+
+int	check_valid(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[1][i])
-	{
-		if (ft_isspace(s[1][i]))
-			return (single_str(s[1], a));
-	}
-	return (multi_str(s, a));
+	if (s[i] == '-' && ft_isnumerical(s[i + 1]))
+		return (1);
+	if (valid_int(push_atoi(s)))
+		return (1);
+	return (0);
 }
-*/
