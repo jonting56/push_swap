@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:30:01 by jting             #+#    #+#             */
-/*   Updated: 2022/05/20 16:44:16 by jting            ###   ########.fr       */
+/*   Updated: 2022/05/26 11:08:49 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	check_str(int ac, char **av, t_data *a)
 	return (0);
 }
 */
+
 t_data	*init_lst(int ac, char **av)
 {
 	int		i;
@@ -73,7 +74,7 @@ t_data	*init_lst(int ac, char **av)
 	t_data	*tmp;
 
 	i = 1;
-	a = create_node(0);
+	a = create_node('a');
 	tmp = a;
 	if (ac < 2)
 		return (single_str(av[1], a, ac));
@@ -81,7 +82,6 @@ t_data	*init_lst(int ac, char **av)
 	{
 	//	if (check_valid(av[i]))
 	//		return (NULL);
-		tmp->data = push_atoi(av[i]);
 		tmp->next = create_node(push_atoi(av[i]));
 		tmp = tmp->next;
 		i++;

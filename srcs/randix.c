@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_lst.c                                        :+:      :+:    :+:   */
+/*   randix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 11:11:02 by jting             #+#    #+#             */
-/*   Updated: 2022/05/26 14:30:52 by jting            ###   ########.fr       */
+/*   Created: 2022/05/26 14:49:54 by jting             #+#    #+#             */
+/*   Updated: 2022/05/26 16:59:49 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_lst(t_data *lst)
+t_data	*radix_sort(t_data *a, t_data *b)
 {
 	t_data	*tmp;
+	int		i;
 
-	ft_printf("%c\n", lst->data);
-	tmp = lst->next;
+	i = 1;
+	tmp = a->next;
 	while (tmp)
 	{
-		ft_printf("%d\n", tmp->data);
-		tmp = tmp->next;
+		if (tmp->data & i)
+
 	}
 }
