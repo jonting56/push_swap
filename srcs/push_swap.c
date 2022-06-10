@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:55:50 by jting             #+#    #+#             */
-/*   Updated: 2022/05/26 16:59:49 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/10 16:51:16 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_data	*fill_lst(char **av)
 	return (node);
 }
 */
+
 int	main(int ac, char **av)
 {
 	t_data	*a;
@@ -37,8 +38,10 @@ int	main(int ac, char **av)
 	}
 	a = init_lst(ac, av);
 	b = create_node('b');
-	b->next = create_node(5);
-	rra(a);
-	print_lst(a);
+	normalise(a);
+	print_lst(a, b);
+	if (lst_len(a) < 5)
+		three_sort(a);
+	//radix_sort(a, b);
 	return (0);
 }

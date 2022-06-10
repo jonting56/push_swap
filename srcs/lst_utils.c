@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:35:02 by jting             #+#    #+#             */
-/*   Updated: 2022/05/18 12:54:05 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/10 13:41:57 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	valid_int(long int n)
 	return (1);
 }
 
-long int	push_atoi(char *s)
+int	push_atoi(char *s)
 {
-	int			i;
-	long int	result;
-	long int	sign;
+	int		i;
+	int		result;
+	int		sign;
 
 	i = 0;
 	result = 0;

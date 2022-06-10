@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:28:23 by jting             #+#    #+#             */
-/*   Updated: 2022/05/26 14:30:53 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/10 16:50:21 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	lst_len(t_data *a)
 	int		i;
 
 	tmp = a;
-	i = 1;
-	while (tmp->next)
+	i = 0;
+	while (tmp)
 	{
 		tmp = tmp->next;
 		i++;
@@ -30,12 +30,15 @@ int	lst_len(t_data *a)
 int	sa(t_data *a)
 {
 	int	tmp;
+	int	index;
 
 	if (lst_len(a) < 2)
 		return (0);
-	tmp = a->data;
-	a->data = a->next->data;
-	a->next->data = tmp;
+	tmp = a->next->data;
+	index = a->next->index;
+	a->next->data = a->next->next->data;
+	a->next->next->data = tmp;
+	a->next->next->index = index;
 	ft_printf("sa\n");
 	return (1);
 }
@@ -43,12 +46,15 @@ int	sa(t_data *a)
 int	sb(t_data *b)
 {
 	int	tmp;
+	int	index;
 
 	if (lst_len(b) < 2)
 		return (0);
-	tmp = b->data;
-	b->data = b->next->data;
-	b->next->data = tmp;
+	tmp = b->next->data;
+	index = b->next->index;
+	b->next->data = b->next->next->data;
+	b->next->next->data = tmp;
+	b->next->next->index = index;
 	ft_printf("sb\n");
 	return (1);
 }
