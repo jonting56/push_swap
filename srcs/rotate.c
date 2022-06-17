@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:11:02 by jting             #+#    #+#             */
-/*   Updated: 2022/05/26 14:49:24 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/16 13:47:49 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	rra(t_data *a)
 	iter->next = NULL;
 	first->next = a->next;
 	a->next = first;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_data *b)
@@ -73,4 +74,27 @@ void	rrb(t_data *b)
 	iter->next = NULL;
 	first->next = b->next;
 	b->next = first;
+	ft_printf("rrb\n");
+}
+
+void	rrr(t_data *a, t_data *b)
+{
+	t_data	*first;
+	t_data	*iter;
+
+	iter = b;
+	while (iter->next->next)
+		iter = iter->next;
+	first = iter->next;
+	iter->next = NULL;
+	first->next = b->next;
+	b->next = first;
+	iter = a;
+	while (iter->next->next)
+		iter = iter->next;
+	first = iter->next;
+	iter->next = NULL;
+	first->next = a->next;
+	a->next = first;
+	ft_printf("rrr\n");
 }

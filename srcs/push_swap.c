@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:55:50 by jting             #+#    #+#             */
-/*   Updated: 2022/06/10 16:51:16 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/17 13:32:19 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
 #include <stdlib.h>
-/*
-t_data	*fill_lst(char **av)
-{
-	t_data	*node;
-	
-	node = create_node(0);
-	check_valid(av, node);
-	return (node);
-}
-*/
 
 int	main(int ac, char **av)
 {
@@ -32,16 +22,20 @@ int	main(int ac, char **av)
 	t_data	*b;
 
 	if (ac < 2)
-	{
-		ft_printf("Error, not enough numbers\n");
-		return (0);
-	}
+		return (ft_printf("Error, not enough numbers\n"));
+	if ((ac == 2 && !check_valid(av[1], ac)) || !check_args(ac, av))
+		return (ft_printf("Error\n"));
 	a = init_lst(ac, av);
 	b = create_node('b');
 	normalise(a);
-	print_lst(a, b);
-	if (lst_len(a) < 5)
+	if (!no_dupes(a))
+		return (ft_printf("Error\n"));
+	if (correct_order(a, b))
+		return (0);
+	if (lst_len(a) == 4)
 		three_sort(a);
-	//radix_sort(a, b);
-	return (0);
+	else if (lst_len(a) <= 6)
+		five_sort(a, b);
+	else if (lst_len(a) >= 7)
+		radix_sort(a, b);
 }

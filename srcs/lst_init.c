@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 11:30:01 by jting             #+#    #+#             */
-/*   Updated: 2022/05/26 11:08:49 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/17 13:20:17 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,49 +23,28 @@ t_data	*create_node(long int n)
 	return (node);
 }
 
-int	multi_str(int ac, char **av, t_data *a)
+t_data	*single_str(char *s, t_data *a)
 {
+	char	**nums;
 	t_data	*tmp;
 	int		i;
 
+	i = 0;
 	tmp = a;
-	i = 2;
-	a->data = push_atoi(av[1]);
-	while (i < ac)
-	{
-		tmp->next = create_node(push_atoi(av[i]));
-		tmp = tmp->next;
-		i++;
-	}
-	return (1);
-}
-
-t_data	*single_str(char *s, t_data *a, int ac)
-{
-	char	**nums;
-	int		i;
-
-	i = 1;
 	nums = ft_split(s, ' ');
 	while (nums[i])
 	{
-	//	if (!check_valid(nums[i]))
-	//		return (0);
+		if (!valid_int(push_atoi(nums[i])))
+		{
+			free_list(a);
+			return (NULL);
+		}
+		tmp->next = create_node(push_atoi(nums[i]));
+		tmp = tmp->next;
 		i++;
 	}
-	multi_str(ac, nums, a);
 	return (a);
 }
-/*
-int	check_str(int ac, char **av, t_data *a)
-{
-	if (ac == 2)
-		return (single_str(av[1], a, ac));
-	if (ac > 2)
-		return (multi_str(ac, av, a));
-	return (0);
-}
-*/
 
 t_data	*init_lst(int ac, char **av)
 {
@@ -76,15 +55,32 @@ t_data	*init_lst(int ac, char **av)
 	i = 1;
 	a = create_node('a');
 	tmp = a;
-	if (ac < 2)
-		return (single_str(av[1], a, ac));
+	if (ac == 2)
+		return (single_str(av[1], a));
 	while (i < ac)
 	{
-	//	if (check_valid(av[i]))
-	//		return (NULL);
+		if (!valid_int(push_atoi(av[i])))
+		{
+			free_list(a);
+			return (NULL);
+		}
 		tmp->next = create_node(push_atoi(av[i]));
 		tmp = tmp->next;
 		i++;
 	}
 	return (a);
+}
+
+int	check_args(int ac, char **av)
+{
+	int		i;
+
+	i = 1;
+	while (i < ac)
+	{
+		if (!check_valid(av[i], ac))
+			return (0);
+		i++;
+	}
+	return (1);
 }

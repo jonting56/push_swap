@@ -6,24 +6,15 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:35:02 by jting             #+#    #+#             */
-/*   Updated: 2022/06/10 13:41:57 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/17 12:21:20 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "stdio.h"
 
-int	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
-}
-
 int	ft_isnumerical(char c)
 {
-	if (c == '-')
-		return (1);
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
@@ -31,18 +22,16 @@ int	ft_isnumerical(char c)
 
 int	valid_int(long int n)
 {
-	if (n > 214783647)
-		return (0);
-	if (n < -2147483648)
+	if (n > 214783647 || n < -2147483648)
 		return (0);
 	return (1);
 }
 
-int	push_atoi(char *s)
+long int	push_atoi(char *s)
 {
-	int		i;
-	int		result;
-	int		sign;
+	int			i;
+	int long	result;
+	int			sign;
 
 	i = 0;
 	result = 0;
@@ -61,14 +50,20 @@ int	push_atoi(char *s)
 	return (result * sign);
 }
 
-int	check_valid(char *s)
+int	check_valid(char *s, int ac)
 {
 	int	i;
 
 	i = 0;
-	if (s[i] == '-' && ft_isnumerical(s[i + 1]))
-		return (1);
-	if (valid_int(push_atoi(s)))
-		return (1);
-	return (0);
+	while (s[i])
+	{
+		while (ac == 2 && s[i] == ' ')
+			i++;
+		if (!ft_isdigit(s[i]) && s[i] != '-')
+			return (0);
+		i++;
+	}
+	if (ac > 2 && !valid_int(push_atoi(s)))
+		return (0);
+	return (1);
 }

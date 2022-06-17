@@ -12,20 +12,43 @@
 
 #include "push_swap.h"
 
-/*int	asc_order(t_data *a)
+int	free_list(t_data *list)
 {
-	t_data	*tmp;
+	t_data	*previous;
 
-	tmp = a->next;
-	while (tmp)
+	while (list)
 	{
-		if (tmp->index > tmp->next->index)
-			return (0);
-		tmp = tmp->next;
+		previous = list;
+		list = list->next;
+		free (previous);
+	}
+	return (printf("Error\n"));
+}
+
+int	no_dupes(t_data *a)
+{
+	int		*current;
+	int		*next;
+	t_data	*top;
+
+	a = a->next;
+	top = a;
+	while (a)
+	{
+		current = &(a->data);
+		while (a->next)
+		{
+			next = &(a->next->data);
+			if (*next == *current)
+				return (0);
+			a = a->next;
+		}
+		top = top->next;
+		a = top;
 	}
 	return (1);
 }
-*/
+
 int	correct_order(t_data *a, t_data *b)
 {
 	t_data	*tmp;
@@ -33,42 +56,36 @@ int	correct_order(t_data *a, t_data *b)
 	tmp = a->next;
 	while (tmp->next)
 	{
-		ft_printf("checking order\n");
 		if (tmp->index > tmp->next->index)
-			return (1);
+			return (0);
 		tmp = tmp->next;
 	}
-	if (lst_len(b) > 1)
+	if (lst_len(b) == 1)
 		return (1);
-	ft_printf("correct order\n");
 	return (0);
 }
 
-
 void	radix_sort(t_data *a, t_data *b)
 {
-	t_data	*tmp;
+	int		current;
 	int		count;
 	int		bit;
 
-	bit = 0;
-	tmp = a->next;
-	ft_printf("Start radix\n");
-	while (correct_order(a, b))
+	bit = 1;
+	while (!correct_order(a, b))
 	{
 		count = lst_len(a) - 1;
-		ft_printf("Pre-radix\n");
 		while (count)
 		{
-			tmp = tmp->next;
-			if (!(tmp->index & (1 << bit)))
-				pb(a, b);
-			else
+			current = a->next->index;
+			if (bit & current)
 				ra(a);
+			else
+				pb(a, b);
 			count--;
 		}
 		while (b->next)
 			pa(a, b);
-		bit++;
+		bit = bit << 1;
 	}
 }

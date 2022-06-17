@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:11:02 by jting             #+#    #+#             */
-/*   Updated: 2022/06/10 10:39:23 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/17 12:33:37 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,24 @@ void	print_index(t_data *a)
 	t_data	*tmp;
 
 	tmp = a->next;
+	ft_printf("Index list:\n");
 	while (tmp)
 	{
 		ft_printf("%d\n", tmp->index);
 		tmp = tmp->next;
 	}
+}
+
+int	precheck(t_data *a)
+{
+	t_data	*tmp;
+
+	tmp = a->next;
+	while (tmp->next)
+	{
+		if (tmp->index > tmp->next->index)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }

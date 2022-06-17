@@ -6,7 +6,7 @@
 /*   By: jting <jting@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:02:08 by jting             #+#    #+#             */
-/*   Updated: 2022/06/10 14:10:40 by jting            ###   ########.fr       */
+/*   Updated: 2022/06/16 15:53:27 by jting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	normalise(t_data *a)
 	int		i;
 	int		min;
 
-	i = 1;
-	tmp = a->next;
+	i = 0;
+	tmp = a;
 	min = find_min(tmp);
 	while (tmp)
 	{
@@ -59,7 +59,7 @@ void	normalise(t_data *a)
 		{
 			tmp->index = i;
 			i++;
-			min = find_next_min(a, tmp->data);
+			min = find_next_min(a, min);
 			tmp = a;
 		}
 		tmp = tmp->next;
